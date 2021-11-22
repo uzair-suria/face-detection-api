@@ -4,6 +4,7 @@ const cors = require("cors");
 const knex = require("knex");
 const { handleRegistration } = require("./controllers/register");
 const { handleSigninRequest } = require("./controllers/signin");
+const { onImageSubmit, handleApiCall } = require("./controllers/image");
 
 const db = knex({
   client: "pg",
@@ -29,6 +30,7 @@ app.post("/signin", (req, res) => handleSigninRequest(req, res, db, bcrypt));
 app.post("/register", (req, res) => handleRegistration(req, res, db, bcrypt));
 app.get("/profile/:id", (req, res) => getProfile(req, res, db));
 app.put("/image", (req, res) => onImageSubmit(req, res, db));
+app.post("/imageurl", (req, res) => handleApiCall(req, res));
 
 app.listen(3010, () => {
   console.log("Server Running on Port 3010");
