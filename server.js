@@ -32,8 +32,10 @@ app.get("/profile/:id", (req, res) => getProfile(req, res, db));
 app.put("/image", (req, res) => onImageSubmit(req, res, db));
 app.post("/imageurl", (req, res) => handleApiCall(req, res));
 
-app.listen(3010, () => {
-  console.log("Server Running on Port 3010");
+app.listen(process.env.PORT || 3010, () => {
+  console.log(
+    `Server Running on Port ${process.env.PORT ? process.env.PORT : 3010}`
+  );
 });
 
 /*
