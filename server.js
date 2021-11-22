@@ -25,7 +25,6 @@ app.use(cors());
 app.get("/", (req, res) => {
   res.send("Home");
 });
-
 app.post("/signin", (req, res) => handleSigninRequest(req, res, db, bcrypt));
 app.post("/register", (req, res) => handleRegistration(req, res, db, bcrypt));
 app.get("/profile/:id", (req, res) => getProfile(req, res, db));
