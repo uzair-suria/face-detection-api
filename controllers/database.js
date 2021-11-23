@@ -3,7 +3,7 @@ const handleDbRequest = (req, res, db) => {
     db.select("*")
       .from("users")
       .then((results) => {
-        res.render("pages/db", results);
+        res.status(200).json(results);
       });
     // const client = await pool.connect();
     // const result = await client.query("SELECT * FROM test_table");
