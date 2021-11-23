@@ -24,20 +24,7 @@ app.use(cors());
 app.get("/", (req, res) => {
   res.send("Home");
 });
-
-app.get("/db", async (req, res) => {
-  try {
-    const client = await pool.connect();
-    const result = await client.query("SELECT * FROM test_table");
-    const results = { results: result ? result.rows : null };
-    res.render("pages/db", results);
-    client.release();
-  } catch (err) {
-    console.error(err);
-    res.send("Error " + err);
-  }
-});
-
+app.get("/db", (req, res) => handleDbRequest(req, res, db));
 app.post("/signin", (req, res) => handleSigninRequest(req, res, db, bcrypt));
 app.post("/register", (req, res) => handleRegistration(req, res, db, bcrypt));
 app.get("/profile/:id", (req, res) => getProfile(req, res, db));
